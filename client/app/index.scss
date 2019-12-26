@@ -1,0 +1,35 @@
+//@import '~bootstrap/scss/bootstrap.scss';
+@import '~/assets/scss/resources.scss';
+@import '~/assets/scss/fonts.scss';
+
+html, body {
+    min-width: 320px;
+    height: 100%;
+    .modal-open {
+        overflow: auto;
+    }
+}
+
+.wrapper {
+    width: 1170px;
+    margin: 0 auto;
+}
+/* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
+.main-container {
+    min-height: calc(100vh)!important;
+}
+
+html {
+    @media screen and (max-width: $lgWidth) {
+        font-size: $lgMainFontSize;
+    }
+    @media screen and (max-width: $mdWidth) {
+        font-size: $mdMainFontSize;
+    }
+    @media screen and (max-width: $smWidth) {
+        font-size: $smMainFontSize;
+    }
+    @media screen and (max-width: $xsWidth) {
+        font-size: $xsMainFontSize;
+    }
+}
