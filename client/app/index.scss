@@ -5,18 +5,18 @@
 html, body {
     min-width: 320px;
     height: 100%;
-    .modal-open {
-        overflow: auto;
-    }
+    margin: 0;
+    padding: 0;
 }
 
 .wrapper {
-    width: 1170px;
+    max-width: 1170px;
     margin: 0 auto;
 }
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
-    min-height: calc(100vh)!important;
+    min-height: calc(100vh - 180px)!important;
+    background-color: #ededed;
 }
 
 html {

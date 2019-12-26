@@ -36,6 +36,7 @@
         "react-popper": "^1.3.6",
         "react-redux": "^7.1.1",
         "react-router-dom": "^5.0.1",
+        "react-scoped-styles": "^0.3.0",
         "react-slick": "^0.25.2",
         "redux": "^4.0.4",
         "redux-actions": "^2.6.5",
@@ -43,6 +44,7 @@
         "redux-persist": "^6.0.0",
         "redux-saga": "^1.1.1",
         "redux-thunk": "^2.3.0",
+        "script-loader": "^0.7.2",
         "slick-carousel": "^1.8.1"
     },
     "devDependencies": {
