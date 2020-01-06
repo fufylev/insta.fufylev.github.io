@@ -1,7 +1,7 @@
-import headerReducer from '~/modules/Header/reducer';
+import { combineReducers } from 'redux';
 
-const rootReducers = {
-    headerReducer,
-};
+import { reducer as registerFormReducer } from '~/modules/Register/reducer';
 
-export default rootReducers;
+export const rootReducers = combineReducers({
+    register: registerFormReducer
+});

@@ -3,33 +3,42 @@
 @import '~/assets/scss/fonts.scss';
 
 html, body {
-    min-width: 320px;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .wrapper {
-    max-width: 1170px;
-    margin: 0 auto;
+  max-width: 1035px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
-    min-height: calc(100vh - 180px)!important;
-    background-color: #ededed;
+  min-height: calc(100vh - 100px) !important;
+  background-color: #fafafa;
 }
 
 html {
-    @media screen and (max-width: $lgWidth) {
-        font-size: $lgMainFontSize;
+  @media screen and (max-width: $lgWidth) {
+    font-size: $lgMainFontSize;
+  }
+  @media screen and (max-width: $mdWidth) {
+    font-size: $mdMainFontSize;
+  }
+  @media screen and (max-width: $smWidth) {
+    font-size: $smMainFontSize;
+    .main-container {
+      background-color: #fff;
     }
-    @media screen and (max-width: $mdWidth) {
-        font-size: $mdMainFontSize;
+  }
+  @media screen and (max-width: $xsWidth) {
+    font-size: $xsMainFontSize;
+    .main-container {
+      background-color: #fff;
     }
-    @media screen and (max-width: $smWidth) {
-        font-size: $smMainFontSize;
-    }
-    @media screen and (max-width: $xsWidth) {
-        font-size: $xsMainFontSize;
-    }
+  }
 }

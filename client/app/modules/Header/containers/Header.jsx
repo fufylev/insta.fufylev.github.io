@@ -1,7 +1,6 @@
 import './Header.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import headerReducer from '~/modules/Header/reducer';
 
 class Header extends Component {
     constructor(props) {
@@ -22,8 +21,4 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return state.headerReducer;
-}
-
-export default connect(mapStateToProps)(Header);
+export default connect()(Header);
