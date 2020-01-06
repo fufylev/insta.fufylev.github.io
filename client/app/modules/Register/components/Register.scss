@@ -1,0 +1,107 @@
+@import '~/assets/scss/resources.scss';
+.picture {
+  margin: 5rem 2rem 0 0;
+}
+
+.register {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+
+
+  form {
+    width: 280px;
+    margin: 0;
+    padding: 0;
+  }
+
+  input {
+    width: 280px;
+    margin: 0 0 0.6rem 0;
+    height: 36px;
+    font-size: 14px;
+    color: #999;
+    border: 1px solid #999;
+    border-radius: 4px;
+    text-indent: 8px;
+    box-sizing: border-box;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  h3 {
+    color: #999;
+    text-align: center;
+
+  }
+  ::placeholder {
+    color: #999;
+    text-indent: 8px;
+  }
+}
+
+.form-submit {
+  width: 280px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background-color: #3897f0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  padding: 5px 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 2rem 0;
+}
+
+.top, .sign_in {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 1px;
+  margin: 0 0 10px;
+  padding: 15px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  text-align: center;
+}
+.apps {
+  display: flex;
+  justify-content: center;
+}
+.apple-store  {
+  margin-right: 1rem;
+}
+
+.google-play, .apple-store {
+  height: 40px;
+}
+
+.error {
+  text-align: center;
+  color: #d80000;
+}
+
+@media screen and (max-width: $smWidth) {
+  .picture {
+    display: none;
+  }
+  .top, .sign_in {
+    border: none;
+  }
+}
+@media screen and (max-width: $xsWidth) {
+  .picture {
+    display: none;
+  }
+  .top, .sign_in {
+    border: none;
+  }
+}
