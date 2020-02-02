@@ -1,3 +1,7 @@
-# Серверная часть проекта
+# Server side
 
-Это серверная часть проекта, написанная на коленке за пару часов. Не используйте это для референса. Код может содержать неоптимальные и неэффективные решения.
+### P.S.
+Since I transfer server to Google FireBase service this code is not valid now
+
+API is here:
+* client/app/libs/api/API.js 

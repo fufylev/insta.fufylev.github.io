@@ -7,7 +7,7 @@ import HomePage from '~/modules/HomePage/HomePage.jsx';
 export default function MainPage() {
     return (
         <main>
-            {!localStorage.getItem('token') ? <Redirect to="/register" /> : <HomePage />}
+            {!localStorage.getItem('uid') ? <Redirect to="/auth" /> : <HomePage />}
         </main>
     );
 };

@@ -1,22 +1,28 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import MainPage from '~/layouts/MainPage/MainPage.jsx';
 import Header from '~/modules/Header/containers/Header.jsx';
-import Footer from '~/modules/Footer/Footer.jsx';
-import RegisterContainer from '~/modules/Register/containers/RegisterContainer.jsx';
+import Register from '~/modules/Authentication/containers/Register.jsx';
+import LogIn from './modules/Authentication/containers/LogIn.jsx';
 
-export default function Routes() {
+const Routes = (props) => {
     return (
         <div className="wrapper">
-            <Header/>
+            {localStorage.getItem('uid') && props.isLoggedIn && <Header/>}
             <div className="main-container">
                 <Switch>
                     <Route exact path="/"><MainPage/></Route>
-                    <Route path="/register"><RegisterContainer/></Route>
+                    <Route path="/register"><Register/></Route>
+                    <Route path="/auth"><LogIn/></Route>
                 </Switch>
             </div>
-            <Footer/>
         </div>
     );
+};
+
+function mapStateToProps(state) {
+    return { ...state.authentication };
 }
+
+export default connect(mapStateToProps)(Routes)

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { reducer as registerFormReducer } from '~/modules/Register/reducer';
+import { reducer as authenticationReducer } from '~/modules/Authentication/reducer';
 
 export const rootReducers = combineReducers({
-    register: registerFormReducer
+    authentication: authenticationReducer
 });
