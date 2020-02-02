@@ -18,7 +18,7 @@ html, body {
 
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
-  min-height: calc(100vh - 100px) !important;
+  min-height: calc(100vh - 50px) !important;
   background-color: #fafafa;
 }
 
