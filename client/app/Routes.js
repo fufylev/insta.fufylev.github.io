@@ -5,16 +5,18 @@ import MainPage from '~/layouts/MainPage/MainPage.jsx';
 import Header from '~/modules/Header/containers/Header.jsx';
 import Register from '~/modules/Authentication/containers/Register.jsx';
 import LogIn from './modules/Authentication/containers/LogIn.jsx';
+import User from './modules/User/User.jsx';
 
 const Routes = (props) => {
     return (
-        <div className="wrapper">
+        <div className="">
             {localStorage.getItem('uid') && props.isLoggedIn && <Header/>}
             <div className="main-container">
                 <Switch>
                     <Route exact path="/"><MainPage/></Route>
                     <Route path="/register"><Register/></Route>
                     <Route path="/auth"><LogIn/></Route>
+                    <Route path="/user"><User/></Route>
                 </Switch>
             </div>
         </div>

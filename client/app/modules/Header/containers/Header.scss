@@ -1,6 +1,55 @@
 @import '~/assets/scss/resources.scss';
 
 .header {
+  background-color: rgba(var(--cdc,255,255,255),1);
+  border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
+}
+
+.wrapper {
+  max-width: 1035px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.header-container {
   min-height: 50px;
-  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sign-out {
+  cursor: pointer;
+}
+
+.logo{
+  padding: 0 20px 0 0;
+  border-right: 1px solid #ccc;
+  color: #383838;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+}
+.icons {
+  margin-left: 20px;
+  cursor: pointer;
+  color: #383838;
+}
+.logo-word {
+  margin-left: 30px;
+}
+.instagram-logo {
+  max-height: 36px;
+}
+
+@media screen and (max-width: $smWidth) {
+  .logo-word {
+    display: none;
+  }
+}
+@media screen and (max-width: $xsWidth) {
+  .logo-word {
+    display: none;
+  }
 }
