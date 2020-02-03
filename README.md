@@ -7,5 +7,4 @@ React JS + Redux, NodeJS, Saga and other middlewares. As a result, I am expectin
 * [Home page](https://github.com/fufylev/lite_instagram/tree/master/client/app/modules/HomePage) with pictures' scrolling
 * [User's](https://github.com/fufylev/lite_instagram/tree/master/client/app/modules/User) page
 * Photo's commenting and liking
-* & more
 
