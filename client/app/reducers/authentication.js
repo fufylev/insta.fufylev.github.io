@@ -1,9 +1,8 @@
 import { handleActions } from 'redux-actions';
 
-import { loadStart, dataReceived, errorOccurred, isLoggedIn, isRegistered, clearReducer} from './actions';
+import { loadStart, dataReceived, errorOccurred, isLoggedIn, isRegistered, clearReducer} from '~/actions/authentication';
 
 const initialState = {
-    error: '',
     user: '',
     isRegistered: false,
     isLoggedIn: false,

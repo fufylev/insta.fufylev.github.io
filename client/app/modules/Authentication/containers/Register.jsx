@@ -5,7 +5,7 @@ import AppStores from '~/modules/Authentication/components/AppStores.jsx';
 import InstagramLogo from '~/libs/components/InstagramLogo/InstagramLogo.jsx';
 import PhonePicture from '~/modules/Authentication/components/PhonePicture.jsx';
 import SingIn from '~/modules/Authentication/components/SingUpLogIn.jsx';
-import { register } from '~/modules/Authentication/actions';
+import { register } from '~/actions/authentication';
 import { Redirect } from 'react-router-dom';
 import Input from '~/modules/Authentication/components/Input';
 

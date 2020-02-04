@@ -1,7 +1,7 @@
 import './index.scss';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { login } from '~/modules/Authentication/actions';
+import { login } from '~/actions/authentication';
 import AppStores from '~/modules/Authentication/components/AppStores.jsx';
 import InstagramLogo from '~/libs/components/InstagramLogo/InstagramLogo.jsx';
 import PhonePicture from '~/modules/Authentication/components/PhonePicture.jsx';

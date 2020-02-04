@@ -2,7 +2,7 @@ import './Header.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { clearReducerHandler } from '~/modules/Authentication/actions';
+import { clearReducerHandler } from '~/actions/authentication';
 import { fire } from '~/libs/api/API';
 import { FaInstagram } from 'react-icons/fa';
 import { FaRegHeart } from 'react-icons/fa';

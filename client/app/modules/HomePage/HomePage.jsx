@@ -1,14 +1,16 @@
 import './HomePage.scss';
 import React, { Component } from 'react';
-import { fire, database } from '~/libs/api/API';
+import { receiveUsersHandler } from '~/actions/users';
+import { receivePicturesHandler } from '~/actions/pictures';
+import { connect } from 'react-redux';
 
 class HomePage extends Component {
     componentDidMount() {
-        const user = fire.auth().currentUser;
-        // console.log(user);
+        this.props.dispatch(receiveUsersHandler('users/'));
+        this.props.dispatch(receivePicturesHandler('pictures/'));
     }
+
     render() {
-        const user = fire.auth().currentUser;
         return (
             <div className="wrapper">
                 PICTURES
@@ -17,4 +19,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default connect()(HomePage);
