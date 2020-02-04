@@ -2,12 +2,12 @@ import './MainPage.scss';
 
 import React from 'react';
 import { Redirect } from 'react-router-dom'
-import HomePage from '~/modules/HomePage/HomePage.jsx';
+import PicturesGallary from '~/modules/PicturesGallary/PicturesGallary.jsx';
 
 export default function MainPage() {
     return (
         <main>
-            {!localStorage.getItem('uid') ? <Redirect to="/auth" /> : <HomePage />}
+            {!localStorage.getItem('uid') ? <Redirect to="/auth" /> : <PicturesGallary />}
         </main>
     );
 };
