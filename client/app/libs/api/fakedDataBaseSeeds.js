@@ -1,6 +1,3 @@
-/*
-*
-* */
 const faker = require('faker');
 const request = require('request');
 
