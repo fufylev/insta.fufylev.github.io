@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import { loadStart, dataReceived } from '~/actions/pictures';
+import { loadStart, dataReceived, picturesToStore } from '~/actions/pictures';
 
 const initialState = {
     pictures: {},
@@ -16,6 +16,15 @@ export const reducer = handleActions({
             ...state,
             pictures: action.payload,
             loading: false,
+        };
+    },
+    [picturesToStore]: (state, action) => {
+        return {
+            ...state,
+            pictures: {
+                ...state.pictures,
+                ...action.payload,
+            },
         };
     },
 }, initialState);

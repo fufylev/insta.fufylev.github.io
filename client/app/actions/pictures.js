@@ -1,14 +1,23 @@
 import { createAction } from 'redux-actions';
-import { read } from '~/libs/api/API';
+import { getCollection } from '~/libs/api/API';
 
 export const loadStart = createAction('[Pictures] Load start');
 export const dataReceived = createAction('[Pictures] Data received');
+export const picturesToStore = createAction('[Pictures] Upload pictures to STORE');
 
-const receivePictures = (url) => (dispatch) => {
+const receivePictures = (collection) => (dispatch) => {
     dispatch(loadStart());
-    read(url).then(pictures => dispatch(dataReceived({...pictures})));
+    getCollection(collection).then(pictures => dispatch(dataReceived({ ...pictures })));
 };
 
-export const receivePicturesHandler = (url) => (dispatch) => {
-    dispatch(receivePictures(url));
+export const receivePicturesHandler = (collection) => (dispatch) => {
+    dispatch(receivePictures(collection));
+};
+
+const picturesUpload = (pictures) => (dispatch) => {
+    dispatch(picturesToStore({ ...pictures }));
+};
+
+export const picturesUploadHandler = (pictures) => (dispatch) => {
+    dispatch(picturesUpload(pictures));
 };
