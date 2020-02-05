@@ -92,7 +92,11 @@
   text-align: center;
   color: #d80000;
 }
-
+.logged-in {
+  margin: 0 auto;
+  padding: 10px 0;
+  text-align: center;
+}
 @media screen and (max-width: $smWidth) {
   .picture {
     display: none;

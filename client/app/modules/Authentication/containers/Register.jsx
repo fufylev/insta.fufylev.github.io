@@ -6,7 +6,7 @@ import InstagramLogo from '~/libs/components/InstagramLogo/InstagramLogo.jsx';
 import PhonePicture from '~/modules/Authentication/components/PhonePicture.jsx';
 import SingIn from '~/modules/Authentication/components/SingUpLogIn.jsx';
 import { register } from '~/actions/authentication';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Input from '~/modules/Authentication/components/Input';
 
 class Register extends Component {
@@ -29,16 +29,21 @@ class Register extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.dispatch(register(this.state));
+        this.props.dispatch(register(this.state)).then(res => {
+            if (res === 'success') {
+                this.props.history.push('/auth');
+            } else {
+                console.log(res);
+            }
+        });
     };
 
     render() {
-        const { error, isRegistered } = this.props;
+        const { error } = this.props;
         const { email, password } = this.state;
 
         return (
             <div className="register">
-                {isRegistered && <Redirect to="/auth"/>}
                 <PhonePicture/>
                 <div className="register-form">
                     <div className="top">
@@ -72,4 +77,4 @@ function mapStateToProps(state) {
     return { ...state.authentication };
 }
 
-export default connect(mapStateToProps)(Register);
+export default withRouter(connect(mapStateToProps)(Register));

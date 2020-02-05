@@ -36,8 +36,8 @@ export function loadFirstSetOfPictures() {
     return new Promise((resolve, reject) => {
         // get first items from the DB 
         let first = db.collection('pictures')
-            .orderBy('image')
-            .limit(9);
+            .orderBy('id')
+            .limit(18);
 
         // fill the pictures with the entries
         let pictures = {}; // empty object
@@ -61,9 +61,9 @@ export function loadNextSetOfPictures(lastVisible) {
     return new Promise((resolve, reject) => {
         // get next items from the DB 
         let query = db.collection('pictures')
-            .orderBy('image')
+            .orderBy('id')
             .startAfter(lastVisible)
-            .limit(9);
+            .limit(18);
 
         // fill the pictures with the entries
         let pictures = {}; // empty object
@@ -117,3 +117,16 @@ export const updateUser = () => {
     console.log(user);
     this.writeUserData(uid, displayName, email, photoURL)
 }*/
+
+/*
+Object.keys(faked.pictures).forEach(key => {
+    db.collection('pictures').doc(key).set({
+        ...faked.pictures[key]
+    })
+        .then((docRef) => {
+            console.log('Document written with ID: ', docRef);
+        })
+        .catch((error) => {
+            console.error('Error adding document: ', error);
+        });
+});*/

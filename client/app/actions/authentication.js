@@ -11,33 +11,41 @@ export const clearReducer = createAction('[Clean Reducer] Clean reducer');
 export const register = ({ email, password }) => (dispatch) => {
     dispatch(loadStart());
 
-    fire.auth().createUserWithEmailAndPassword(email, password).then(res => {
-        const uid = res.user.uid;
-        dispatch(isRegisteredHandler(true));
-        dispatch(dataReceived(uid));
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        dispatch(errorOccurredHandler(errorMessage));
+    return new Promise((resolve, reject) => {
+        fire.auth().createUserWithEmailAndPassword(email, password).then(res => {
+            const uid = res.user.uid;
+            dispatch(isRegisteredHandler(true));
+            dispatch(dataReceived(uid));
+            resolve('success')
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            dispatch(errorOccurredHandler(errorMessage));
+            reject(error)
+        });
     });
 };
 
 export const login = ({ email, password }) => (dispatch) => {
     dispatch(loadStart());
 
-    fire.auth().signInWithEmailAndPassword(email, password).then(res => {
-        const uid = res.user.uid;
-        localStorage.setItem('uid', uid);
-        dispatch(isLoggedInHandler(true));
-        dispatch(dataReceived(uid));
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-            dispatch(errorOccurredHandler('Wrong password.'));
-        } else {
-            dispatch(errorOccurredHandler(errorMessage));
-        }
+    return new Promise((resolve, reject) => {
+        fire.auth().signInWithEmailAndPassword(email, password).then(res => {
+            const uid = res.user.uid;
+            localStorage.setItem('uid', uid);
+            dispatch(isLoggedInHandler(true));
+            dispatch(dataReceived(uid));
+            resolve('success')
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                dispatch(errorOccurredHandler('Wrong password.'));
+            } else {
+                dispatch(errorOccurredHandler(errorMessage));
+            }
+            reject(error)
+        });
     });
 };
 
