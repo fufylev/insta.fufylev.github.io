@@ -7,7 +7,7 @@ function rand(max = 30) {
     return Math.floor(Math.random() * max);
 }
 
-function generateUID () {
+async function generateUID () {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
@@ -37,6 +37,7 @@ async function importSeeds() {
     for (let i = 0; i < numberOfUsers; i++) {
         const metadata = await getUser();
         const user = {
+            uid: await generateUID(),
             name: metadata.name,
             avatar: metadata.picture,
             email: metadata.email,
@@ -44,24 +45,27 @@ async function importSeeds() {
             username: metadata.login.username,
             gender: metadata.gender
         };
-        users = {...users, [generateUID()]: user};
+        const uid = user.uid;
+        users = {...users, [uid]: user};
         console.log(`Created user ${user.name.first} ${user.name.last}`);
     }
 
     // faked pictures
-    const numberOfPictures = 250;
+    const numberOfPictures = 500;
     let pictures = {};
 
     for (let i = 0; i < numberOfPictures; i++) {
-        const randOwner = Object.keys(users)[rand(numberOfUsers)];
+        const randOwnerData = users[Object.keys(users)[rand(numberOfUsers)]];
+        const randOwner = {uid: randOwnerData.uid, username: randOwnerData.username};
         const likes = [];
         const comments = [];
 
-        const likesCount = rand(30);
-        const commentsCount = rand(30);
+        const likesCount = rand(50);
+        const commentsCount = rand(50);
 
         for (let j = 0; j < likesCount; j++) {
-            const randUser = Object.keys(users)[rand(numberOfUsers)];
+            const randUserData = users[Object.keys(users)[rand(numberOfUsers)]];
+            const randUser = {uid: randUserData.uid, username: randUserData.username};
             likes.push({
                 user: randUser,
                 timestamp: faker.date.past(),
@@ -69,7 +73,8 @@ async function importSeeds() {
         }
 
         for (let j = 0; j < commentsCount; j++) {
-            const randUser = Object.keys(users)[rand(numberOfUsers)];
+            const randUserData = users[Object.keys(users)[rand(numberOfUsers)]];
+            const randUser = {uid: randUserData.uid, username: randUserData.username};
             comments.push({
                 user: randUser,
                 text: faker.lorem.sentence(),
@@ -78,12 +83,14 @@ async function importSeeds() {
         }
 
         const picture = {
+            id: await generateUID(),
             image: await getImage(),
             owner: randOwner,
             likes,
             comments,
         };
-        pictures = {...pictures, [generateUID()]: picture};
+        const id = picture.id;
+        pictures = {...pictures, [id]: picture};
 
         console.log(`Created picture for ${randOwner}`);
     }

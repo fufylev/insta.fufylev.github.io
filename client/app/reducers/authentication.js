@@ -32,12 +32,14 @@ export const reducer = handleActions({
         return {
             ...state,
             isRegistered: action.payload,
+            errorOccurred: '',
         };
     },
     [isLoggedIn]: (state, action) => {
         return {
             ...state,
             isLoggedIn: action.payload,
+            errorOccurred: '',
         };
     },
     [clearReducer]: (state, action) => {
