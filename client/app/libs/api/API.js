@@ -37,7 +37,7 @@ export function loadFirstSetOfPictures() {
         // get first items from the DB 
         let first = db.collection('pictures')
             .orderBy('id')
-            .limit(18);
+            .limit(24);
 
         // fill the pictures with the entries
         let pictures = {}; // empty object
@@ -46,14 +46,14 @@ export function loadFirstSetOfPictures() {
                 const id = document.id;
                 pictures = { ...pictures, [id]: document.data() };
             });
-        }).catch(error => console.log(error));
+        }).catch(error => reject(error));
 
         // Get the last visible document
         first.get().then((documentSnapshots) => {
             let lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1];
             // return the results
             resolve({ lastVisible, pictures });
-        }).catch(error => console.log(error));
+        }).catch(error => reject(error));
     });
 }
 
@@ -63,7 +63,7 @@ export function loadNextSetOfPictures(lastVisible) {
         let query = db.collection('pictures')
             .orderBy('id')
             .startAfter(lastVisible)
-            .limit(18);
+            .limit(24);
 
         // fill the pictures with the entries
         let pictures = {}; // empty object

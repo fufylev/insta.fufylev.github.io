@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import { loadStart, dataReceived, picturesToStore, clearStore } from '~/actions/pictures';
 
 const initialState = {
-    pictures: {},
+    pictures: [],
     loading: false,
 };
 
@@ -27,12 +27,12 @@ export const reducer = handleActions({
         };
     },
     [picturesToStore]: (state, action) => {
+        const pics = action.payload;
+        const picArray = Object.keys(pics).map(key => pics[key]);
+
         return {
             ...state,
-            pictures: {
-                ...state.pictures,
-                ...action.payload,
-            },
+            pictures: state.pictures.concat(picArray),
         };
     },
 }, initialState);

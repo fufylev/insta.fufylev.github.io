@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { loadFirstSetOfPictures, loadNextSetOfPictures } from '~/libs/api/API';
 
 export const loadStart = createAction('[Pictures] Load start');
 export const dataReceived = createAction('[Pictures] Data received');
@@ -6,20 +7,39 @@ export const clearStore = createAction('[Pictures] Clear Store');
 export const picturesToStore = createAction('[Pictures] Upload pictures to STORE');
 
 export const loadStartHandler = () => (dispatch) => {
-    return new Promise((res, rej) => {
+    return new Promise((resolve, reject) => {
         dispatch(loadStart());
-        res()
+        resolve();
     });
 };
 
-export const clearStoreHandler = () => (dispatch) => {
-    return new Promise((res, rej) => {
+export const clearPicturesStoreHandler = () => (dispatch) => {
+    return new Promise((resolve, reject) => {
         dispatch(clearStore());
-        res()
+        resolve();
     });
 };
 
-export const picturesUploadHandler = (pictures) => (dispatch) => {
-    dispatch(dataReceived());
-    dispatch(picturesToStore({ ...pictures }));
+export const picturesUploadHandler = (lastVisible) => (dispatch) => {
+    return new Promise((resolve, reject) => {
+        dispatch(loadStart());
+        if (lastVisible === null) {
+            loadFirstSetOfPictures()
+                .catch(error => reject(error))
+                .then((data) => {
+                    dispatch(picturesToStore({ ...data.pictures }));
+                    dispatch(dataReceived());
+                    resolve(data);
+                })
+        } else {
+            loadNextSetOfPictures(lastVisible)
+                .catch(error => reject(error))
+                .then((data) => {
+                    dispatch(picturesToStore({ ...data.pictures }));
+                    dispatch(dataReceived());
+                    resolve(data);
+                });
+        }
+
+    });
 };

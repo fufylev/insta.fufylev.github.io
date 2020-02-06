@@ -3,6 +3,14 @@
 .header {
   background-color: rgba(var(--cdc,255,255,255),1);
   border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
 }
 
 .wrapper {
@@ -22,7 +30,7 @@
 }
 
 .logo{
-  padding: 0 20px 0 0;
+  padding-right: 20px;
   border-right: 1px solid #ccc;
   color: #383838;
 }
@@ -35,6 +43,9 @@
   margin-left: 20px;
   cursor: pointer;
   color: #383838;
+}
+.icons:hover {
+  color: #999999;
 }
 .logo-word {
   margin-left: 30px;

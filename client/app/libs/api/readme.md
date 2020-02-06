@@ -1,16 +1,23 @@
-## Faked DB
-
+# DATA BASE 
+### API.js
+This is a set of various queries to connect and get data from the Google FireBase Store
+##
+### Faked DB
 This is a faked DB created for the purpose to demonstrate my App with various users and pictures\
 All metadata receives from:
+
 * https://randomuser.me/
 * https://picsum.photos/
 
+I manually created JSON file and then upload it to the FireBase DB\
 No real users or personal data.\
-Metadata is open for read only.
-## 
-### Seeds 
+Metadata is open for read and write only for authorized users - I must `Sign Up => Sign in` to see the data.
+##
+### Usage
+#### Fake seeds
 This script is written on my onw\
-Usage:
+
+#### Usage:
 * Download `fakedDataBaseSeeds.js` to your folder
 * Run in terminal:
 ```

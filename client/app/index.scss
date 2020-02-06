@@ -3,23 +3,38 @@
 @import '~/assets/scss/fonts.scss';
 
 html, body {
-  min-width: 320px;
-  height: 100%;
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #fafafa;
+  color: #262626;
+  padding-bottom: 3rem;
+}
+:root {
+  font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 .wrapper {
-  max-width: 1035px;
+  max-width: 74rem;
   margin: 0 auto;
+}
+
+.main-app-container {
+  position: relative;
 }
 
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
   min-height: calc(100vh - 50px) !important;
   background-color: #fafafa;
+  margin-top: 51px;
 }
 
 html {
