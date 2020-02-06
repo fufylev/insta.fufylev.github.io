@@ -28,7 +28,7 @@ class Header extends Component {
                     <div className="header-container">
                         <div className="icons-container">
                             <Link to="/" className="">
-                                <FaInstagram size="2em" className="logo"/>
+                                <FaInstagram size="3rem" className="logo"/>
                             </Link>
                             <Link to="/" className="logo-word">
                                 <img src={instagramLogo} alt="logo" className="instagram-logo"/>

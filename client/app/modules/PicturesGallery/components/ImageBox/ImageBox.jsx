@@ -1,0 +1,26 @@
+import './ImageBox.scss';
+
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { FaHeart } from 'react-icons/fa';
+import { FaCommentAlt } from 'react-icons/fa';
+export default class ImageBox extends Component {
+    render() {
+        const { image, likes, comments, id } = this.props;
+        const likesCount = likes.length;
+        const commentsCount = comments.length;
+        return (
+            <Link to={`/pictures/${id}`}>
+                <div className="gallery-item" tabIndex="0">
+                    <img src={image} className="gallery-image" alt="" />
+                    <div className="gallery-item-info">
+                        <ul>
+                            <li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><FaHeart size="1em" color='white'/> {likesCount}</li>
+                            <li className="gallery-item-likes"><span className="visually-hidden">Comments:</span><FaCommentAlt size="1em" color='white'/> {commentsCount}</li>
+                        </ul>
+                    </div>
+                </div>
+            </Link>
+        );
+    }
+}

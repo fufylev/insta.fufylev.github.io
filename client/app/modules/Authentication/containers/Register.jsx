@@ -2,12 +2,12 @@ import './index.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AppStores from '~/modules/Authentication/components/AppStores.jsx';
-import InstagramLogo from '~/libs/components/InstagramLogo/InstagramLogo.jsx';
+import InstagramLogo from '~/components/InstagramLogo/InstagramLogo.jsx';
 import PhonePicture from '~/modules/Authentication/components/PhonePicture.jsx';
 import SingIn from '~/modules/Authentication/components/SingUpLogIn.jsx';
 import { register } from '~/actions/authentication';
 import { withRouter } from 'react-router-dom';
-import Input from '~/modules/Authentication/components/Input';
+import Input from '~/modules/Authentication/components/Input.jsx';
 
 class Register extends Component {
     constructor(props) {

@@ -1,0 +1,66 @@
+@import '~/assets/scss/resources.scss';
+.container {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem -1rem;
+  padding-bottom: 3rem;
+}
+
+
+@supports (display: grid) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 2rem;
+  }
+
+  .gallery {
+    width: auto;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: $mdWidth) {
+  @supports (display: grid) {
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 0;
+    }
+  }
+  .container {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: $smWidth) {
+  @supports (display: grid) {
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 0;
+    }
+  }
+  .container {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: $xsWidth) {
+  @supports (display: grid) {
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 0;
+    }
+  }
+  .container {
+    padding: 0;
+  }
+}

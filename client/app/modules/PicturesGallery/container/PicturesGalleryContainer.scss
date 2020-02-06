@@ -1,0 +1,16 @@
+@import '~/assets/scss/resources.scss';
+.wrapper {
+  padding: 10px;
+  position: relative;
+}
+@media screen and (max-width: $smWidth) {
+  .wrapper {
+    padding: 1px;
+  }
+}
+
+@media screen and (max-width: $xsWidth) {
+  .wrapper {
+    padding: 1px;
+  }
+}
