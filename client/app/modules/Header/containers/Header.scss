@@ -1,35 +1,32 @@
 @import '~/assets/scss/resources.scss';
 
 .header {
-  background-color: rgba(var(--cdc,255,255,255),1);
-  border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
+  background-color: rgba(var(--cdc, 255, 255, 255), 1);
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
-  width: 100%;
+  width: 100vw;
   -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
   box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
 }
 
-.wrapper {
-  max-width: 1035px;
-  margin: 0 auto;
-  padding: 0 10px;
-}
 
 .header-container {
   min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 1rem!important;
 }
+
 .sign-out {
   cursor: pointer;
 }
 
-.logo{
+.logo {
   padding-right: 20px;
   border-right: 1px solid #ccc;
   color: #383838;
@@ -39,17 +36,21 @@
   display: flex;
   align-items: center;
 }
+
 .icons {
   margin-left: 20px;
   cursor: pointer;
   color: #383838;
 }
+
 .icons:hover {
   color: #999999;
 }
+
 .logo-word {
   margin-left: 30px;
 }
+
 .instagram-logo {
   max-height: 36px;
 }
@@ -58,9 +59,16 @@
   .logo-word {
     display: none;
   }
+  .logo {
+    border: none;
+  }
 }
+
 @media screen and (max-width: $xsWidth) {
   .logo-word {
     display: none;
+  }
+  .logo {
+    border: none;
   }
 }

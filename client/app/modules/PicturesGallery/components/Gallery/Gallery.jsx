@@ -1,12 +1,11 @@
 import './Gallery.scss';
-
-import React, { useEffect } from 'react';
 import ImageBox from '../ImageBox/ImageBox.jsx';
+import React, { Component } from 'react';
 
-export function Gallery(props) {
-    const { pictures, renderItem, onScroll } = props;
+class Gallery extends Component {
 
-    const handleScroll = () => {
+    handleScroll = () => {
+        const { onScroll } = this.props;
         if ((window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight) {
             return;
         }
@@ -16,24 +15,32 @@ export function Gallery(props) {
         }
     };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [handleScroll]);
-
-    const renderItemDefault = (picture) => {
+    renderItemDefault = (picture) => {
         return (
             <ImageBox key={picture.id} {...picture} />
         );
     };
 
-    return (
-        <div className="container">
-            <h4>Hi Maytham</h4>
-            <div className="gallery">
-                {pictures.map(renderItem ? renderItem : renderItemDefault)}
-            </div>
-        </div>
-    );
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    render() {
+        const { pictures, renderItem } = this.props;
+
+        return (
+            <>
+                <h2 className="yQ0j1">Explore</h2>
+                <div className="gallery">
+                    {pictures.map(renderItem ? renderItem : this.renderItemDefault)}
+                </div>
+            </>
+        );
+    }
 }
+
+export default Gallery;

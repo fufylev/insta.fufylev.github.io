@@ -22,7 +22,7 @@ const rules = [
     {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: ['react-scoped-styles/script-loader', 'babel-loader'],
+        use: ['babel-loader'],
     },
 ];
 

@@ -24,7 +24,6 @@ const rules = [
                     sourceMap: true,
                 },
             },
-            'react-scoped-styles/style-loader',
             {
                 loader: 'sass-loader',
                 options: {

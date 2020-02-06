@@ -1,17 +1,17 @@
 @import '~/assets/scss/resources.scss';
-.container {
-  max-width: 74rem;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  margin: -1rem -1rem;
-  padding-bottom: 3rem;
 }
-
+.yQ0j1 {
+  color: #999;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  margin: 0 0 16px 12px;
+  text-align: left;
+}
 
 @supports (display: grid) {
   .gallery {

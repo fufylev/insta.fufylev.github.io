@@ -2,18 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
+  height: 60px;
+  margin: 1rem 0;
 }
 
 .loader {
-  border: 10px solid #f3f3f3;
+  border: 8px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 10px solid blue;
-  border-right: 10px solid green;
-  border-bottom: 10px solid red;
-  border-left: 10px solid pink;
-  width: 80px;
-  height: 80px;
+  border-top: 8px solid blue;
+  border-right: 8px solid green;
+  border-bottom: 8px solid red;
+  border-left: 8px solid pink;
+  width: 60px;
+  height: 60px;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
