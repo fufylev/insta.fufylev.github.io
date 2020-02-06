@@ -7,7 +7,7 @@ class User extends Component {
     render() {
         const { isLoggedIn } = this.props;
         return (
-            <div className="wrapper">
+            <div className="container">
                 {isLoggedIn !== true && <Redirect to="/"/>}
                 User to be developed
             </div>

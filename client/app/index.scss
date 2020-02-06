@@ -3,14 +3,15 @@
 @import '~/assets/scss/fonts.scss';
 
 html, body {
-  margin: 0;
+  margin: 0 auto;
+  padding: 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background-color: #fafafa;
+  background-color: rgba(var(--b3f,250,250,250),1);
   color: #262626;
-  padding-bottom: 3rem;
 }
+
 :root {
   font-size: 14px;
 }
@@ -22,19 +23,18 @@ html, body {
 }
 
 .wrapper {
+  width: 100%;
+  margin: 0 auto!important;
+  position: relative;
+}
+.container {
   max-width: 74rem;
   margin: 0 auto;
 }
-
-.main-app-container {
-  position: relative;
-}
-
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
-  min-height: calc(100vh - 50px) !important;
-  background-color: #fafafa;
-  margin-top: 51px;
+  min-height: calc(100vh - 60px) !important;
+  margin-top: 60px;
 }
 
 html {
@@ -46,14 +46,10 @@ html {
   }
   @media screen and (max-width: $smWidth) {
     font-size: $smMainFontSize;
-    .main-container {
-      background-color: #fff;
-    }
+
   }
   @media screen and (max-width: $xsWidth) {
     font-size: $xsMainFontSize;
-    .main-container {
-      background-color: #fff;
-    }
+
   }
 }

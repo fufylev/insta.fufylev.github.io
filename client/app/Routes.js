@@ -9,7 +9,7 @@ import User from './modules/User/User.jsx';
 
 const Routes = (props) => {
     return (
-        <div className="main-app-container">
+        <div className="wrapper">
             {localStorage.getItem('uid') && props.isLoggedIn && <Header/>}
             <div className="main-container">
                 <Switch>

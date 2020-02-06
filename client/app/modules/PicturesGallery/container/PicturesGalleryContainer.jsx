@@ -2,8 +2,9 @@ import './PicturesGalleryContainer.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clearPicturesStoreHandler, picturesUploadHandler } from '~/actions/pictures';
-import { Gallery } from '../components/Gallery/Gallery.jsx';
+import Gallery from '../components/Gallery/Gallery.jsx';
 import Loader from '../../../components/Loader/Loader.js';
+
 class PicturesGalleryContainer extends Component {
     state = {
         isModalVisible: false,
@@ -11,19 +12,21 @@ class PicturesGalleryContainer extends Component {
     };
 
     firstQuery = () => {
-        const {lastVisible} = this.state;
+        const { lastVisible } = this.state;
 
         this.props.dispatch(picturesUploadHandler(lastVisible))
-            .then(data => {this.setState({lastVisible: data.lastVisible})})
-            .catch(error => console.log(error))
+            .then(data => {
+                this.setState({ lastVisible: data.lastVisible });
+            })
+            .catch(error => console.log(error));
     };
 
     nextQuery = () => {
-        const {lastVisible} = this.state;
+        const { lastVisible } = this.state;
 
         if (lastVisible !== null) {
             this.props.dispatch(picturesUploadHandler(lastVisible))
-                .then(data => this.setState({lastVisible: data.lastVisible}))
+                .then(data => this.setState({ lastVisible: data.lastVisible }));
         } else {
             this.firstQuery();
         }
@@ -47,8 +50,8 @@ class PicturesGalleryContainer extends Component {
         const numberOfPictures = Object.keys(pictures).length;
 
         return (
-            <div className="wrapper">
-                {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures} />}
+            <div className="container">
+                {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures}/>}
                 {loading && numberOfPictures === 0 && <Loader/>}
                 {loading && numberOfPictures !== 0 && <Loader/>}
             </div>
