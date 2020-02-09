@@ -1,0 +1,76 @@
+@import '~/assets/scss/resources.scss';
+
+.picture-card {
+  display: flex;
+
+  &-img {
+    max-width: 600px;
+    height: auto;
+  }
+
+  &-desc {
+    max-width: 400px;
+    min-width: 200px;
+    padding: 1rem;
+  }
+
+  &-user {
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
+    &_link {
+      color: #434343;
+      cursor: pointer;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+    &_link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &-comments {
+    max-height: 400px;
+    overflow: auto;
+    &-container {
+      margin-top: 1rem;
+      //border-top: 1px solid #ccc;
+    }
+  }
+}
+
+
+@media screen and (max-width: $mdWidth) {
+
+}
+
+@media screen and (max-width: $smWidth) {
+  .picture-card {
+    max-width: 350px;
+    flex-direction: column;
+    justify-content: center;
+
+    .picture-card-img {
+      max-width: 350px;
+    }
+
+    .picture-card-desc {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $xsWidth) {
+  .picture-card {
+    max-width: 350px;
+    flex-direction: column;
+    justify-content: center;
+
+    .picture-card-img {
+      max-width: 350px;
+    }
+
+    .picture-card-desc {
+      width: 100%;
+    }
+  }
+}

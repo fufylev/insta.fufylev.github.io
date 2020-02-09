@@ -7,7 +7,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  //margin: 1rem;
+  margin: 1px;
   color: #fff;
   cursor: pointer;
 }
@@ -78,7 +78,7 @@ img {
 @supports (display: grid) {
   .gallery-item {
     width: auto;
-    margin: 0;
+    margin: 1px;
   }
 }
 

@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/app';
+import { isArray } from 'redux-actions/lib/utils/isArray';
 
 require('firebase/firestore');
 
@@ -83,6 +84,31 @@ export function loadNextSetOfPictures(lastVisible) {
         }).catch(error => console.log(error));
     });
 
+}
+
+export function getQuery() {
+    const pictures = db.collection('pictures').doc('likes');
+    pictures.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, ' => ', doc.data());
+        });
+    });
+}
+
+export function getPicture(id) {
+    return new Promise((resolve, reject) => {
+        const picture = db.collection('pictures').doc(id);
+        picture.get().then((doc) => {
+            if (doc.exists) {
+                resolve(doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log('No such document!');
+            }
+        }).catch((error) => {
+            reject(error);
+        });
+    });
 }
 
 /*export const writeUserData = (uid, name, email, imageUrl) => {

@@ -30,13 +30,13 @@ class Gallery extends Component {
     }
 
     render() {
-        const { pictures, renderItem } = this.props;
+        const { pictures } = this.props;
 
         return (
             <>
-                <h2 className="yQ0j1">Explore</h2>
+                <h2 className="">Explore</h2>
                 <div className="gallery">
-                    {pictures.map(renderItem ? renderItem : this.renderItemDefault)}
+                    {pictures.map(this.renderItemDefault)}
                 </div>
             </>
         );
