@@ -6,6 +6,7 @@ import Header from '~/modules/Header/containers/Header.jsx';
 import Register from '~/modules/Authentication/containers/Register.jsx';
 import LogIn from './modules/Authentication/containers/LogIn.jsx';
 import User from './modules/User/User.jsx';
+import { PicturesGalleryContainer } from '~/modules/PicturesGallery/container/PicturesGalleryContainer.jsx';
 
 const Routes = (props) => {
     return (
@@ -17,6 +18,7 @@ const Routes = (props) => {
                     <Route path="/register"><Register/></Route>
                     <Route path="/auth"><LogIn/></Route>
                     <Route path="/user"><User/></Route>
+                    <Route path="/pictures"><PicturesGalleryContainer/></Route>
                 </Switch>
             </div>
         </div>

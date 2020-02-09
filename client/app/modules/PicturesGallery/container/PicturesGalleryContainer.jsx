@@ -1,11 +1,13 @@
 import './PicturesGalleryContainer.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect, Route } from 'react-router-dom';
 import { clearPicturesStoreHandler, picturesUploadHandler } from '~/actions/pictures';
-import Gallery from '../components/Gallery/Gallery.jsx';
-import Loader from '../../../components/Loader/Loader.js';
+import Gallery from '~/modules/PicturesGallery/components/Gallery/Gallery.jsx';
+import Loader from '~/components/Loader/Loader';
+import PicturesModal from '~/modules/PicturesGallery/components/PictureModal/PicturesModal.jsx';
 
-class PicturesGalleryContainer extends Component {
+class PicturesGallery extends Component {
     state = {
         isModalVisible: false,
         lastVisible: null,
@@ -46,21 +48,28 @@ class PicturesGalleryContainer extends Component {
     }
 
     render() {
-        const { pictures, loading } = this.props;
+        const { pictures, loading } = this.props.pictures;
+        const { isLoggedIn } = this.props.authentication;
         const numberOfPictures = Object.keys(pictures).length;
 
         return (
-            <div className="container">
+            <article className="container">
+                {!isLoggedIn === true && !localStorage.getItem('uid') && <Redirect to="/auth" />}
                 {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures}/>}
-                {loading && numberOfPictures === 0 && <Loader/>}
-                {loading && numberOfPictures !== 0 && <Loader/>}
-            </div>
+                <Route exact path={'/pictures/:id'}>
+                    <PicturesModal/>
+                </Route>
+                {loading && <Loader/>}
+            </article>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { ...state.pictures };
+    return {
+        pictures: state.pictures,
+        authentication: state.authentication
+    };
 }
 
-export default connect(mapStateToProps)(PicturesGalleryContainer);
+export const PicturesGalleryContainer = connect(mapStateToProps)(PicturesGallery);

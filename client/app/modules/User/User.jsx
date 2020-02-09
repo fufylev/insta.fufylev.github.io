@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './User.scss';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class User extends Component {
     render() {
@@ -9,7 +9,8 @@ class User extends Component {
         return (
             <div className="container">
                 {isLoggedIn !== true && <Redirect to="/"/>}
-                User to be developed
+                <h3>User page to be developed soon</h3>
+                <h3>However, you can explore the <Link to='/pictures/'>Gallery</Link></h3>
             </div>
         );
     }
