@@ -26,7 +26,6 @@ const rules = [
                 },
             },
             'css-loader',
-            'react-scoped-styles/style-loader',
             {
                 loader: 'postcss-loader',
                 options: {

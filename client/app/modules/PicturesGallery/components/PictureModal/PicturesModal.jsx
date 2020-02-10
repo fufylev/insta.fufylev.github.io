@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './PicturesModal.scss';
 import Loader from '~/components/Loader/Loader';
 import { Modal } from '~/components/Modal/Modal.jsx';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 export class PicturesModal extends Component {
@@ -17,6 +17,7 @@ export class PicturesModal extends Component {
 
     renderItemDefault = (picture) => {
         const numberOfComments = picture.comments.length;
+
         return (
             <div className="picture-card">
                 <img src={picture.image} alt={picture.id} className="picture-card-img"/>
@@ -40,7 +41,7 @@ export class PicturesModal extends Component {
                                     </span>
                                     <span>{comment.text}</span>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 </div>
@@ -51,12 +52,16 @@ export class PicturesModal extends Component {
     render() {
         const id = this.props.match.params.id;
         const picture = this.props.pictures.filter(picture => picture.id === id)[0];
-        console.log(picture);
+        if (picture === undefined) {
+            const { history } = this.props;
+            history.replace('/page404');
+            location.reload();
+        }
         const { loading } = this.props;
         return (
             <div className='container'>
                 <Modal onClose={this.handleClose}>
-                    {loading && <Loader />}
+                    {loading && <Loader/>}
                     {!loading && this.renderItemDefault(picture)}
                 </Modal>
             </div>
