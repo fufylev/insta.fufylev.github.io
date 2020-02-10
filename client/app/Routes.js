@@ -7,6 +7,7 @@ import Register from '~/modules/Authentication/containers/Register.jsx';
 import LogIn from './modules/Authentication/containers/LogIn.jsx';
 import User from './modules/User/User.jsx';
 import { PicturesGalleryContainer } from '~/modules/PicturesGallery/container/PicturesGalleryContainer.jsx';
+import PageNotFound from '~/components/PageNotFound/PageNotFound.jsx';
 
 const Routes = (props) => {
     return (
@@ -19,6 +20,8 @@ const Routes = (props) => {
                     <Route path="/auth"><LogIn/></Route>
                     <Route path="/user"><User/></Route>
                     <Route path="/pictures"><PicturesGalleryContainer/></Route>
+                    <Route path="/error404"><PageNotFound/></Route>
+                    <Route path="*"><PageNotFound/></Route>
                 </Switch>
             </div>
         </div>
