@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import 'firebase/app';
-import { isArray } from 'redux-actions/lib/utils/isArray';
 
 require('firebase/firestore');
 
@@ -111,17 +110,25 @@ export function getPicture(id) {
     });
 }
 
-/*export const writeUserData = (uid, name, email, imageUrl) => {
-    console.log(uid, name, email, imageUrl);
-    database.ref('users/' + uid).set({
-        username: name,
+export const writeUserData = (uid, name, email, imageUrl) => {
+    db.collection('users').doc(uid).set({
+        uid,
+        name,
         avatar: imageUrl,
-        bio: '',
-        email: email,
-    });
+        email,
+        dob: null,
+        username: null,
+        gender: null,
+    })
+        .then(() => {
+            console.log('Document successfully written!');
+        })
+        .catch((error) => {
+            console.error('Error writing document: ', error);
+        });
 };
 
-export const updateUser = () => {
+/*export const updateUser = () => {
     const user = fire.auth().currentUser;
     user.updateProfile({
         displayName: 'Test User',
@@ -135,14 +142,57 @@ export const updateUser = () => {
     });
 };*/
 
-// this.updateUser();
+
 // user in DB
-/*if (fire.auth().currentUser !== null) {
-    const {uid, email, displayName, photoURL} = fire.auth().currentUser;
-    const user = fire.auth().currentUser;
-    console.log(user);
-    this.writeUserData(uid, displayName, email, photoURL)
-}*/
+export const checkIfUserMetadataExists = (uid) => {
+    return new Promise((resolve, reject) => {
+        const user = db.collection('users').doc(uid);
+        user.get().then((doc) => {
+            if (doc.exists) {
+                resolve({ifExists: true, metadata: doc.data()});
+            } else {
+                resolve({ifExists: false});
+            }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+    });
+
+};
+export const setUser = () => {
+    return new Promise((resolve, reject) => {
+        if (fire.auth().currentUser !== null) {
+            const { uid, email, displayName, photoURL } = fire.auth().currentUser;
+            const user = fire.auth().currentUser;
+            console.log(user);
+            db.collection('users').doc(uid).set({
+                uid,
+                name: displayName,
+                avatar: photoURL,
+                email,
+                dob: null,
+                username: null,
+                gender: null,
+            })
+                .then(() => {
+                    resolve(true);
+                })
+                .catch((error) => {
+                    console.error('Error writing document: ', error);
+                });
+        }
+    })
+};
+export const getUser = () => {
+    return new Promise((resolve, reject) => {
+        if (fire.auth().currentUser !== null) {
+            const { uid } = fire.auth().currentUser;
+            resolve(uid)
+        }
+    })
+
+};
+
 
 /*
 Object.keys(faked.pictures).forEach(key => {
