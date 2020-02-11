@@ -7,8 +7,8 @@ function rand(max = 30) {
     return Math.floor(Math.random() * max);
 }
 
-async function generateUID () {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+async function generateUID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
 async function getImage() {
@@ -31,41 +31,49 @@ async function getUser() {
 async function importSeeds() {
 
     // faked users
-    const numberOfUsers = 4;
+    const numberOfUsers = 30;
     let users = {};
 
     for (let i = 0; i < numberOfUsers; i++) {
         const metadata = await getUser();
         const user = {
-            uid: await generateUID(),
-            name: metadata.name,
+            uid: i === 0 ? 'zppKmNsSc7O5xtBmcyCP6iV8m4x1' : await generateUID(),
+            name: i === 0 ? {
+                'title': 'mr',
+                'first': 'Test',
+                'last': 'User'
+            } : metadata.name,
             avatar: metadata.picture,
-            email: metadata.email,
-            dob: metadata.dob,
-            username: metadata.login.username,
-            gender: metadata.gender
+            email: i === 0 ? 'test-user@gmail.com' : metadata.email,
+            dob: metadata.dob.date,
+            username: i === 0 ? 'testUser1' : metadata.login.username,
+            gender: metadata.gender,
+            phone: metadata.phone,
+            cell: metadata.cell,
+            registered: metadata.registered.date,
+
         };
         const uid = user.uid;
-        users = {...users, [uid]: user};
-        console.log(`Created user ${user.name.first} ${user.name.last}`);
+        users = { ...users, [uid]: user };
+        console.log(`${i}Created user ${user.uid} / ${user.name.first} ${user.name.last}`);
     }
 
     // faked pictures
-    const numberOfPictures = 4;
-    let pictures = {};
+    const numberOfPictures = 1000;
+    let pictures = [];
 
     for (let i = 0; i < numberOfPictures; i++) {
         const randOwnerData = users[Object.keys(users)[rand(numberOfUsers)]];
-        const randOwner = {uid: randOwnerData.uid, username: randOwnerData.username};
+        const randOwner = { uid: randOwnerData.uid, username: randOwnerData.username };
         const likes = [];
         const comments = [];
 
         const likesCount = rand(50);
-        const commentsCount = rand(50);
+        const commentsCount = rand(20);
 
         for (let j = 0; j < likesCount; j++) {
             const randUserData = users[Object.keys(users)[rand(numberOfUsers)]];
-            const randUser = {uid: randUserData.uid, username: randUserData.username};
+            const randUser = { uid: randUserData.uid, username: randUserData.username };
             likes.push({
                 user: randUser,
                 timestamp: faker.date.past(),
@@ -74,7 +82,7 @@ async function importSeeds() {
 
         for (let j = 0; j < commentsCount; j++) {
             const randUserData = users[Object.keys(users)[rand(numberOfUsers)]];
-            const randUser = {uid: randUserData.uid, username: randUserData.username};
+            const randUser = { uid: randUserData.uid, username: randUserData.username };
             comments.push({
                 user: randUser,
                 text: faker.lorem.sentence(),
@@ -85,19 +93,27 @@ async function importSeeds() {
         const picture = {
             id: await generateUID(),
             image: await getImage(),
+            description: faker.lorem.words(),
             owner: randOwner,
             likes,
             comments,
         };
-        const id = picture.id;
-        pictures = {...pictures, [id]: picture};
-
-        console.log(`Created picture for ${randOwner}`);
+        pictures = [...pictures, picture];
+        console.log(`${i} Created picture for ${randOwner}`);
     }
+
+    Object.keys(users).forEach(key => {
+        users = {
+            ...users, [key]: {
+                ...users[key],
+                pictures: pictures.filter(picture => picture.owner.uid === key)
+            },
+        };
+    });
 
     const initialJson = {}; // пустой массив для первоначального наполнения файла
 
-    let fileName = 'fakedDB.json'; // имя файла или путь к нему
+    let fileName = 'fakedDB_v2.json'; // имя файла или путь к нему
 
     if (process.argv[2]) {
         fileName = process.argv[2]; // переназначаем имя файла или путь к нему
@@ -110,14 +126,14 @@ async function importSeeds() {
                 if (err) {
                     throw err;
                 } else {
-                    console.log( 'Success' );
+                    console.log('Success');
                 }
             });
         }
     });
 
-    let addLog = (log, users, pictures) => {
-        log = {users, pictures};
+    let addLog = (log, users) => {
+        log = {...users};
         return JSON.stringify(log, null, 4);
     };
 
@@ -125,18 +141,16 @@ async function importSeeds() {
         if (err) {
             throw err;
         } else {
-            let newLog = addLog(JSON.parse(data), users, pictures);
+            let newLog = addLog(JSON.parse(data), users);
             fs.writeFile(fileName, newLog, (err) => {
                 if (err) {
                     throw err;
                 } else {
-                    console.log( 'Success' );
+                    console.log('Success');
                 }
             });
         }
     });
-
-    return [users, pictures];
 }
 
 importSeeds();

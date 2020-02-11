@@ -49,7 +49,7 @@ export const login = ({ email, password }) => (dispatch) => {
     });
 };
 
-export const clearReducerHandler = (value) => (dispatch) => {
+export const clearAuthStoreHandler = (value) => (dispatch) => {
     dispatch(clearReducer(value));
 };
 

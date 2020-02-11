@@ -1,18 +1,16 @@
 import firebase from 'firebase';
 import 'firebase/app';
-
 require('firebase/firestore');
 
-// Initialize Cloud Firestore through Firebase
 export const firebaseConfig = {
-    apiKey: 'AIzaSyAkR8iasRbs1BGSnrzzyCgoR791pDqrJ0Y',
-    authDomain: 'lite-instagram-v2.firebaseapp.com',
-    databaseURL: 'https://lite-instagram-v2.firebaseio.com',
-    projectId: 'lite-instagram-v2',
-    storageBucket: 'lite-instagram-v2.appspot.com',
-    messagingSenderId: '259872157190',
-    appId: '1:259872157190:web:7dc00c09524ab547eedd87',
-    measurementId: 'G-Q5XJL006RY',
+    apiKey: 'AIzaSyDV_nIYcvEbvHUAwDCgiya3TPVCr43Fzg4',
+    authDomain: 'insta-andrey-f.firebaseapp.com',
+    databaseURL: 'https://insta-andrey-f.firebaseio.com',
+    projectId: 'insta-andrey-f',
+    storageBucket: 'insta-andrey-f.appspot.com',
+    messagingSenderId: '510498654768',
+    appId: '1:510498654768:web:9c5b79ee428525a5bd7bf5',
+    measurementId: 'G-ZHTYBPCLQ7'
 };
 
 export const fire = firebase.initializeApp(firebaseConfig);
@@ -110,40 +108,6 @@ export function getPicture(id) {
     });
 }
 
-export const writeUserData = (uid, name, email, imageUrl) => {
-    db.collection('users').doc(uid).set({
-        uid,
-        name,
-        avatar: imageUrl,
-        email,
-        dob: null,
-        username: null,
-        gender: null,
-    })
-        .then(() => {
-            console.log('Document successfully written!');
-        })
-        .catch((error) => {
-            console.error('Error writing document: ', error);
-        });
-};
-
-/*export const updateUser = () => {
-    const user = fire.auth().currentUser;
-    user.updateProfile({
-        displayName: 'Test User',
-        photoURL: 'https://example.com/jane-q-user/profile.jpg',
-    }).then(() => {
-        // Update successful.
-        console.log('Update successful');
-    }).catch((error) => {
-        // An error happened.
-        console.log(error);
-    });
-};*/
-
-
-// user in DB
 export const checkIfUserMetadataExists = (uid) => {
     return new Promise((resolve, reject) => {
         const user = db.collection('users').doc(uid);
@@ -159,6 +123,7 @@ export const checkIfUserMetadataExists = (uid) => {
     });
 
 };
+
 export const setUser = () => {
     return new Promise((resolve, reject) => {
         if (fire.auth().currentUser !== null) {
@@ -167,12 +132,24 @@ export const setUser = () => {
             console.log(user);
             db.collection('users').doc(uid).set({
                 uid,
-                name: displayName,
-                avatar: photoURL,
+                name: {
+                    'title': '',
+                    'first': displayName,
+                    'last': ''
+                },
+                avatar: {
+                    'large': photoURL,
+                    'medium': photoURL,
+                    'thumbnail': photoURL,
+                },
                 email,
                 dob: null,
                 username: null,
                 gender: null,
+                phone: '',
+                cell: '',
+                registered: new Date(),
+                pictures: []
             })
                 .then(() => {
                     resolve(true);
@@ -183,6 +160,7 @@ export const setUser = () => {
         }
     })
 };
+
 export const getUser = () => {
     return new Promise((resolve, reject) => {
         if (fire.auth().currentUser !== null) {
@@ -190,19 +168,56 @@ export const getUser = () => {
             resolve(uid)
         }
     })
-
 };
 
+// for future use
+/*export const updateUser = () => {
+    const user = fire.auth().currentUser;
+    user.updateProfile({
+        displayName: 'Test User',
+        photoURL: 'https://example.com/jane-q-user/profile.jpg',
+    }).then(() => {
+        // Update successful.
+        console.log('Update successful');
+    }).catch((error) => {
+        // An error happened.
+        console.log(error);
+    });
+};*/
+/*getCollection('users').then(metadata => {
+            const user = db.collection('users').doc('Enjq5LAQ1Xavcvwzae7d2orsdR93');
+            let usersArr = [];
+            for (let i = 0; i < 15; i++) {
+                usersArr = [...usersArr, Object.keys(metadata)[this.rand(50)]];
+            }
 
-/*
-Object.keys(faked.pictures).forEach(key => {
-    db.collection('pictures').doc(key).set({
-        ...faked.pictures[key]
-    })
-        .then((docRef) => {
-            console.log('Document written with ID: ', docRef);
-        })
-        .catch((error) => {
-            console.error('Error adding document: ', error);
+            user.update({
+                pictures: pics[46],
+                followings: usersArr,
+                dob: {age:28, date: '1992-05-23T21:05:33.508Z'},
+                avatar: {
+                    large: 'https://randomuser.me/api/portraits/men/51.jpg',
+                    medium: 'https://randomuser.me/api/portraits/med/men/51.jpg',
+                    thumbnail: 'https://randomuser.me/api/portraits/thumb/men/51.jpg'
+                },
+            })
+                .then(() => {
+                    console.log('Document successfully updated!');
+                })
+                .catch((error) => {
+                    // The document probably doesn't exist.
+                    console.error('Error updating document: ', error);
+                });
         });
-});*/
+        */
+/*Object.keys(users).forEach(key => {
+            db.collection('users').doc(key).set({
+                ...users[key]
+            })
+                .then(() => {
+                    console.log('Document successfully written!');
+                })
+                .catch((error) => {
+                    console.error('Error writing document: ', error);
+                });
+        })*/
