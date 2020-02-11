@@ -18,11 +18,11 @@ Metadata is open for read and write only for authorized users - I must `Sign Up 
 This script is written on my onw\
 
 #### Usage:
-* Download `fakedDataBaseSeeds.js` to your folder
+* Download `fakedDataBaseSeeds_v2.js` to your folder
 * Run in terminal:
 ```
 cd <folder's path>
-node fakedDataBaseSeeds
+node fakedDataBaseSeeds_v2
 ``` 
 * Once script has finished the process in the same folder the file `fakedDB.json` will appear
 * You can upload this fake DB to your server DB
