@@ -1,8 +1,9 @@
 import './Header.scss';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { clearReducerHandler } from '~/actions/authentication';
+import { clearAuthStoreHandler } from '~/actions/authentication';
+import { clearUsersStoreHandler } from '~/actions/users';
 import { fire } from '~/libs/api/API';
 import { FaInstagram, FaRegHeart, FaRegUser, FaSignOutAlt } from 'react-icons/fa';
 import { TiCompass } from 'react-icons/ti';
@@ -15,9 +16,9 @@ const Header = (props) => {
         fire.auth().signOut()
             .then(() => {
                 localStorage.removeItem('uid');
-                props.dispatch(clearReducerHandler());
+                props.dispatch(clearAuthStoreHandler());
+                props.dispatch(clearUsersStoreHandler());
             });
-
     }
 
     return (
@@ -31,7 +32,7 @@ const Header = (props) => {
                         <img src={instagramLogo} alt="logo" className="instagram-logo"/>
                     </Link>
                 </div>
-                <SearchLine />
+                <SearchLine/>
                 <div className="icons-container">
                     <Link to="/pictures" className="">
                         <TiCompass size="2em" className="icons"/>

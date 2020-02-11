@@ -55,6 +55,7 @@ class PicturesGallery extends Component {
         return (
             <article className="container">
                 {!isLoggedIn === true && !localStorage.getItem('uid') && <Redirect to="/auth" />}
+                <h2 className="">Explore</h2>
                 {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures}/>}
                 <Route exact path={'/pictures/:id'}>
                     <PicturesModal/>

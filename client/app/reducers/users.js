@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 
-import { loadStart, dataReceived, saveUser } from '~/actions/users';
+import { loadStart, dataReceived, saveUser, clearStore } from '~/actions/users';
 
 const initialState = {
     currentUser: {},
@@ -12,6 +12,12 @@ const initialState = {
 export const reducer = handleActions({
     [loadStart]: (state) => {
         return {...state, loading: true};
+    },
+    [clearStore]: (state) => {
+        return {
+            ...state,
+            ...initialState
+        };
     },
     [dataReceived]: (state, action) => {
         return {

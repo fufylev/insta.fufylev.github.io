@@ -34,7 +34,6 @@ class Gallery extends Component {
 
         return (
             <>
-                <h2 className="">Explore</h2>
                 <div className="gallery">
                     {pictures.map(this.renderItemDefault)}
                 </div>
