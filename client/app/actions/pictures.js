@@ -20,6 +20,10 @@ export const clearPicturesStoreHandler = () => (dispatch) => {
     });
 };
 
+export const savePicturesToState = (pictures) => (dispatch) => {
+    dispatch(picturesToStore({ ...pictures }));
+};
+
 export const picturesUploadHandler = (lastVisible) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadStart());

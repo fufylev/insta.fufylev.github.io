@@ -2,37 +2,58 @@ import React, { Component } from 'react';
 import './User.scss';
 import { connect } from 'react-redux';
 import { Link, Redirect, Route } from 'react-router-dom';
-import Gallery from '../PicturesGallery/components/Gallery/Gallery.jsx';
+import Gallery from '~/components/Gallery/Gallery.jsx';
 import { FiSettings } from 'react-icons/fi';
+import { clearPicturesStoreHandler } from '~/actions/pictures';
+import PicturesModal from '~/components/PictureModal/PicturesModal.jsx';
+import { savePicturesToState } from '~/actions/pictures';
 
-class User extends Component {
+class UserComponent extends Component {
     state = {
-        start: 1,
-        end: 12,
+        start: -11,
+        end: 0,
     };
 
     handleScroll = () => {
         const { currentUser } = this.props.users;
         const numberOfPictures = currentUser.pictures.length;
+        if (numberOfPictures === this.state.end) {
+            return
+        }
         this.setState((prevState) => ({
-            start: prevState.start + 1 <= numberOfPictures ? prevState.start + 1 : prevState.start,
+            start: prevState.start + 12 <= numberOfPictures ? prevState.start + 12 : prevState.start,
             end: prevState.end + 12 <= numberOfPictures ? prevState.end + 12 : numberOfPictures,
-        }));
+        }), () => {
+            const { start, end } = this.state;
+            let pictures = [];
+            for (let i = start; i <= end; i++) {
+                pictures = [...pictures, currentUser.pictures[i - 1]];
+            }
+            this.props.dispatch(savePicturesToState(pictures))
+        });
+
     };
 
     settingsHandler = () => {
         console.log('settings btn pressed')
     };
 
+    componentDidMount() {
+        const numberOfPictures = this.props.users.currentUser.pictures.length;
+
+        this.props.dispatch(clearPicturesStoreHandler()).then(() => {
+            if (numberOfPictures > 0) {
+                this.handleScroll()
+            }
+        });
+    }
+
     render() {
-        const { start, end } = this.state;
         const { currentUser } = this.props.users;
+        const { pictures } = this.props.pictures;
         const { isLoggedIn } = this.props.authentication;
         const numberOfPictures = currentUser.pictures.length;
-        let pictures = [];
-        for (let i = start; i <= end; i++) {
-            pictures = [...pictures, currentUser.pictures[i - 1]];
-        }
+
         return (
             <div className="container">
                 {!localStorage.getItem('uid') && isLoggedIn !== true && <Redirect to="/"/>}
@@ -70,7 +91,9 @@ class User extends Component {
                     </div>
                 )}
                 {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures}/>}
-
+                <Route path={'/user/:id'}>
+                    <PicturesModal/>
+                </Route>
             </div>
         );
     }
@@ -80,7 +103,7 @@ function mapStateToProps(state) {
     return {
         users: state.users,
         authentication: state.authentication,
+        pictures: state.pictures,
     };
 }
-
-export default connect(mapStateToProps)(User);
+export const User = connect(mapStateToProps)(UserComponent);

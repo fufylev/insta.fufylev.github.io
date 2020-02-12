@@ -22,15 +22,15 @@ class DashBoard extends Component {
     }
 
     render() {
-        // const { currentUser } = this.props.users;
+        const { currentUser } = this.props.users;
         const { isLoggedIn } = this.props.authentication;
         return (
             <article className="container">
                 {!localStorage.getItem('uid') && isLoggedIn !== true && <Redirect to="/"/>}
-                <h3>DashBoard to be developed soon</h3>
+                {currentUser && <h3>Hello: {currentUser.username}</h3>}
+                <h3>DashBoard is being developed</h3>
                 <h3>However, you can explore the <Link to='/pictures/'>Gallery</Link></h3>
-                {/*{currentUser && <h4>Hello: {currentUser.username}</h4>}
-                <p>Here will be your followers' & following's photos</p>*/}
+
             </article>
         );
     }

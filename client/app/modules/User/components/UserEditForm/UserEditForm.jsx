@@ -5,7 +5,7 @@ class UserEditForm extends Component {
     render() {
         return (
             <div className='container'>
-                <h2>User Edit Form to be developed</h2>
+                <h2>User Edit Form is being developed</h2>
             </div>
         );
     }

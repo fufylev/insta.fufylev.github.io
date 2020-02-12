@@ -40,6 +40,7 @@ class LogIn extends Component {
     render() {
         const { email, password } = this.state;
         const { error, isLoggedIn } = this.props;
+        console.log(this.props);
 
         return (
             <>

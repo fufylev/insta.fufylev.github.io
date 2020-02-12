@@ -1,5 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/app';
+import {picturesConverter} from './converters';
+
 require('firebase/firestore');
 
 export const firebaseConfig = {
@@ -16,6 +18,21 @@ export const firebaseConfig = {
 export const fire = firebase.initializeApp(firebaseConfig);
 export const db = fire.firestore();
 
+export const getCustom = () => {
+    db.collection('users')
+        .withConverter(picturesConverter)
+        .get().then((querySnapshot) => {
+            let metadata = {};
+            querySnapshot.forEach((doc) => {
+                const id = doc.id;
+                metadata = { ...metadata, [id]: doc.data()['pictures'] };
+            });
+            console.log(metadata);
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+};
+
 export const getCollection = (collection) => {
     return new Promise((resolve, reject) => {
         db.collection(collection).get().then((querySnapshot) => {
@@ -26,6 +43,29 @@ export const getCollection = (collection) => {
                 metadata = { ...metadata, [id]: doc.data() };
             });
             resolve(metadata);
+        }).catch(error => console.log(error));
+    });
+};
+
+export const fillCollection = (collection) => {
+    return new Promise((resolve, reject) => {
+        db.collection(collection).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                const pictures = doc.data()['pictures'];
+                pictures.forEach(picture => {
+                    db.collection('pictures').doc(picture.id).set({
+                        ...picture
+                    })
+                        .then(() => {
+                            console.log('Document successfully written!');
+                        })
+                        .catch((error) => {
+                            console.error('Error writing document: ', error);
+                        });
+                });
+            });
+            resolve();
         }).catch(error => console.log(error));
     });
 };

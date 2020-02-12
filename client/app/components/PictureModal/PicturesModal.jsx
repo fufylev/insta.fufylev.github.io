@@ -5,10 +5,10 @@ import { Modal } from '~/components/Modal/Modal.jsx';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-export class PicturesModal extends Component {
+class PicturesModal extends Component {
     handleClose = () => {
         const { history } = this.props;
-        history.replace('/pictures');
+        history.goBack();
     };
 
     goToUser = (id) => {
@@ -48,6 +48,10 @@ export class PicturesModal extends Component {
             </div>
         );
     };
+
+    componentDidMount() {
+        console.log(this.props.history);
+    }
 
     render() {
         const id = this.props.match.params.id;
