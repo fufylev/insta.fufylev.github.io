@@ -5,7 +5,9 @@ import { Redirect, Route } from 'react-router-dom';
 import { clearPicturesStoreHandler, picturesUploadHandler } from '~/actions/pictures';
 import Gallery from '~/modules/PicturesGallery/components/Gallery/Gallery.jsx';
 import Loader from '~/components/Loader/Loader';
-import PicturesModal from '~/modules/PicturesGallery/components/PictureModal/PicturesModal.jsx';
+import PicturesModal from '~/components/PictureModal/PicturesModal.jsx';
+
+// import PicturesModal from '~/modules/PicturesGallery/components/PictureModal/PicturesModal.jsx';
 
 class PicturesGallery extends Component {
     state = {
@@ -45,6 +47,7 @@ class PicturesGallery extends Component {
         this.props.dispatch(clearPicturesStoreHandler()).then(() => {
             this.firstQuery();
         });
+
     }
 
     render() {
@@ -54,7 +57,7 @@ class PicturesGallery extends Component {
 
         return (
             <article className="container">
-                {!isLoggedIn === true && !localStorage.getItem('uid') && <Redirect to="/auth" />}
+                {!isLoggedIn === true && !localStorage.getItem('uid') && <Redirect to="/auth"/>}
                 <h2 className="">Explore</h2>
                 {numberOfPictures > 0 && <Gallery onScroll={this.handleScroll} pictures={pictures}/>}
                 <Route exact path={'/pictures/:id'}>
@@ -69,7 +72,7 @@ class PicturesGallery extends Component {
 function mapStateToProps(state) {
     return {
         pictures: state.pictures,
-        authentication: state.authentication
+        authentication: state.authentication,
     };
 }
 

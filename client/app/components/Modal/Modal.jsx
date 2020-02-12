@@ -28,6 +28,11 @@ export class Modal extends Component {
         }
     };
 
+    onCloseBtn = () => {
+        const { onClose } = this.props;
+        onClose();
+    };
+
     renderView = () => {
         const { children } = this.props;
         return (
@@ -36,7 +41,7 @@ export class Modal extends Component {
                     <div className="modal">
                         {children}
                     </div>
-                    <span className='modal-close' onClick={this.onClose}>X</span>
+                    <span className='modal-close' onClick={this.onCloseBtn}>X</span>
                 </div>
             </>
 
