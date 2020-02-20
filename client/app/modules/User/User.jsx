@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
 import './User.scss';
+
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect, Route } from 'react-router-dom';
-import Gallery from '~/components/Gallery/Gallery.jsx';
 import { FiSettings } from 'react-icons/fi';
+
+import Gallery from '~/components/Gallery/Gallery.jsx';
 import { clearPicturesStoreHandler } from '~/actions/pictures';
 import PicturesModal from '~/components/PictureModal/PicturesModal.jsx';
 import { savePicturesToState } from '~/actions/pictures';

@@ -6,7 +6,7 @@ import Header from '~/modules/Header/containers/Header.jsx';
 import Register from '~/modules/Authentication/containers/Register.jsx';
 import LogIn from './modules/Authentication/containers/LogIn.jsx';
 import {User} from './modules/User/User.jsx';
-import { PicturesGalleryContainer } from '~/modules/PicturesGallery/container/PicturesGalleryContainer.jsx';
+import PicturesGalleryContainer from '~/modules/PicturesGallery/container/PicturesGalleryContainer.jsx';
 import PageNotFound from '~/components/PageNotFound/PageNotFound.jsx';
 import UserEditForm from './modules/User/components/UserEditForm/UserEditForm.jsx';
 

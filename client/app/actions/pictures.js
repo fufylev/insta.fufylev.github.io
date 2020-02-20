@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { loadFirstSetOfPictures, loadNextSetOfPictures, getPicture } from '~/libs/api/API';
+import { loadFirstSetOfPictures, loadNextSetOfPictures } from '~/libs/api/API_gallery';
 
 export const loadStart = createAction('[Pictures] Load start');
 export const dataReceived = createAction('[Pictures] Data received');
@@ -24,17 +24,17 @@ export const savePicturesToState = (pictures) => (dispatch) => {
     dispatch(picturesToStore({ ...pictures }));
 };
 
-export const picturesUploadHandler = (lastVisible) => (dispatch) => {
+export const picturesUploadHandler = (lastVisible, user) => (dispatch) => {
     return new Promise((resolve, reject) => {
         dispatch(loadStart());
         if (lastVisible === null) {
-            loadFirstSetOfPictures()
+            loadFirstSetOfPictures(user)
                 .catch(error => reject(error))
                 .then((data) => {
                     dispatch(picturesToStore({ ...data.pictures }));
                     dispatch(dataReceived());
                     resolve(data);
-                })
+                });
         } else {
             loadNextSetOfPictures(lastVisible)
                 .catch(error => reject(error))
@@ -54,6 +54,6 @@ export const getImageHandler = (id) => (dispatch) => {
         getPicture(id).then(image => {
             dispatch(dataReceived());
             resolve(image);
-        }).catch(error => reject(error))
+        }).catch(error => reject(error));
     });
 };

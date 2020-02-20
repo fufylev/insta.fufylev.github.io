@@ -17,15 +17,19 @@
     min-height: 300px;
     max-height: 600px;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .modal-close {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 30px;
   font-size: 30px;
   font-weight: bold;
   z-index: 150;
   cursor: pointer;
+  color: #ffffff;
 }

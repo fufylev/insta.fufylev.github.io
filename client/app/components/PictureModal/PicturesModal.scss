@@ -4,37 +4,114 @@
   display: flex;
 
   &-img {
+    height: 600px;
     max-width: 600px;
-    height: auto;
+    overflow: hidden;
   }
 
   &-desc {
     max-width: 400px;
     min-width: 200px;
-    padding: 1rem;
+    position: relative;
   }
 
   &-user {
     border-bottom: 1px solid #ccc;
-    padding: 15px 0;
+    padding: 15px 10px;
+    &-header {
+      display: flex;
+      flex: 1;
+      align-items: center;
+    }
+    &-avatar {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ff6f98;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
     &_link {
       color: #434343;
       cursor: pointer;
       font-weight: bold;
       margin-right: 1rem;
     }
+
     &_link:hover {
       text-decoration: underline;
     }
   }
 
+  &-follow {
+    color: #3897f0;
+    cursor: pointer;
+  }
+
   &-comments {
-    max-height: 400px;
+    max-height: 370px;
     overflow: auto;
+    padding: 0 10px;
+
     &-container {
       margin-top: 1rem;
-      //border-top: 1px solid #ccc;
     }
+  }
+
+  &-likes {
+    //margin-top: 15px;
+    padding: 10px;
+    min-height: 60px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &-form {
+    position: absolute;
+    z-index: 101;
+    bottom: 0;
+    left: 0;
+    margin: 1rem 0 0 0;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    min-height: 70px;
+  }
+
+  &-add-comment {
+    background: 0 0;
+    border: 0;
+    max-height: 80px;
+    outline: 0;
+    resize: none;
+    font-size: 14px;
+    line-height: 18px;
+    width: 320px;
+    padding: 0;
+    margin: 0;
+    text-rendering: auto;
+    color: -internal-light-dark-color(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+  }
+  &-post {
+    outline: 0;
+    border: 0;
+    color: #3897f0;
+    color: rgba(var(--h5f,56,151,240),1);
+    display: inline;
+    padding: 0;
+    position: relative;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    cursor: pointer;
   }
 }
 
