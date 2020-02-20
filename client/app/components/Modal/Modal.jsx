@@ -2,6 +2,7 @@ import './Modal.scss';
 
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
+import { MdClose } from 'react-icons/md';
 
 const modalRoot = document.getElementById('modal');
 
@@ -41,7 +42,7 @@ export class Modal extends Component {
                     <div className="modal">
                         {children}
                     </div>
-                    <span className='modal-close' onClick={this.onCloseBtn}>X</span>
+                    <MdClose size='1.5em' className='modal-close' onClick={this.onCloseBtn}/>
                 </div>
             </>
 

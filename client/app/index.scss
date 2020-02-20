@@ -34,6 +34,7 @@ html, body {
 }
 /* прижимаем футер к низу страницы: header - ...px + footer - ...px = ...px + */
 .main-container {
+  padding-top: 10px;
   min-height: calc(100vh - 60px) !important;
   margin-top: 60px;
 }

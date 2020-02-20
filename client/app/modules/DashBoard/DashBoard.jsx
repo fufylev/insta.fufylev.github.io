@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './DashBoard.scss';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { checkIfUserMetadataExists, getUser, db } from '~/libs/api/API';
+import { checkIfUserMetadataExists, getUser } from '~/libs/api/API';
 import { saveUserToStateHandler, setUserToDataBaseHandler } from '~/actions/users';
 
 class DashBoard extends Component {

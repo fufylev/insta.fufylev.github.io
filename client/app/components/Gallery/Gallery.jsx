@@ -15,7 +15,7 @@ class Gallery extends Component {
         }
     };
 
-    renderItemDefault = (picture,index) => {
+    renderItemDefault = (picture, index) => {
         return (
             <ImageBox key={index} {...picture} />
         );

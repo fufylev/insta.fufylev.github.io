@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
 import { checkIfUserMetadataExists, setUser } from '~/libs/api/API';
+import {getUserPictures} from '~/libs/api/API_gallery';
 
 export const loadStart = createAction('[Users] Load start');
 export const dataReceived = createAction('[Users] Data received');
@@ -14,7 +15,10 @@ export const clearUsersStoreHandler = () => (dispatch) => {
 };
 
 const saveUserToState = (user) => (dispatch) => {
-    dispatch(saveUser(user));
+    getUserPictures(user).then(pictures => {
+        const userWithPictures = {...user, pictures};
+        dispatch(saveUser(userWithPictures));
+    });
 };
 
 const setUserToDataBase = () => (dispatch) => {

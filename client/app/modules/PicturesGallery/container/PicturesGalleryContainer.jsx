@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import { clearPicturesStoreHandler, picturesUploadHandler } from '~/actions/pictures';
-import Gallery from '~/modules/PicturesGallery/components/Gallery/Gallery.jsx';
+import Gallery from '~/components/Gallery/Gallery.jsx';
 import Loader from '~/components/Loader/Loader';
 import PicturesModal from '~/components/PictureModal/PicturesModal.jsx';
 
-// import PicturesModal from '~/modules/PicturesGallery/components/PictureModal/PicturesModal.jsx';
-
-class PicturesGallery extends Component {
+class PicturesGalleryContainer extends Component {
     state = {
         isModalVisible: false,
         lastVisible: null,
@@ -17,8 +15,10 @@ class PicturesGallery extends Component {
 
     firstQuery = () => {
         const { lastVisible } = this.state;
+        const { uid, username } = this.props.users.currentUser;
+        const user = { uid, username };
 
-        this.props.dispatch(picturesUploadHandler(lastVisible))
+        this.props.dispatch(picturesUploadHandler(lastVisible, user))
             .then(data => {
                 this.setState({ lastVisible: data.lastVisible });
             })
@@ -72,8 +72,9 @@ class PicturesGallery extends Component {
 function mapStateToProps(state) {
     return {
         pictures: state.pictures,
+        users: state.users,
         authentication: state.authentication,
     };
 }
 
-export const PicturesGalleryContainer = connect(mapStateToProps)(PicturesGallery);
+export default connect(mapStateToProps)(PicturesGalleryContainer);
