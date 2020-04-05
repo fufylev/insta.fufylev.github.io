@@ -17,6 +17,22 @@ export const firebaseConfig = {
 export const fire = firebase.initializeApp(firebaseConfig); // used
 export const db = fire.firestore(); // used
 
+export function generateID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+export const addCollections = (user) => {
+    db.collection('users').doc(user.uid).set({
+        ...user
+    })
+        .then(() => {
+            console.log('Document successfully written!');
+        })
+        .catch((error) => {
+            console.error('Error writing document: ', error);
+        });
+};
+
 /**
  *
  * @param uid
@@ -64,6 +80,8 @@ export const setUser = () => {
                 phone: '',
                 cell: '',
                 registered: new Date(),
+                following: [],
+                followers: [],
             })
                 .then(() => {
                     resolve(true);

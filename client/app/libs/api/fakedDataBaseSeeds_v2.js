@@ -7,8 +7,8 @@ function rand(max = 30) {
     return Math.floor(Math.random() * max);
 }
 
-async function generateUID() {
-    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+async function generateID() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
 async function getImage() {
@@ -31,13 +31,13 @@ async function getUser() {
 async function importSeeds() {
 
     // faked users
-    const numberOfUsers = 30;
+    const numberOfUsers = 35;
     let users = {};
 
     for (let i = 0; i < numberOfUsers; i++) {
         const metadata = await getUser();
         const user = {
-            uid: i === 0 ? 'zppKmNsSc7O5xtBmcyCP6iV8m4x1' : await generateUID(),
+            uid: i === 0 ? 'zppKmNsSc7O5xtBmcyCP6iV8m4x1' : await generateID(),
             name: i === 0 ? {
                 'title': 'mr',
                 'first': 'Test',
@@ -57,14 +57,42 @@ async function importSeeds() {
         users = { ...users, [uid]: user };
         console.log(`${i}Created user ${user.uid} / ${user.name.first} ${user.name.last}`);
     }
+    Object.keys(users).forEach(key => {
+        let following = [];
+        for (let i = 0; i < rand(numberOfUsers); i++) {
+            const randOwnerData = users[Object.keys(users)[rand(numberOfUsers)]];
+            const randOwner = { avatar: randOwnerData.avatar.thumbnail, uid: randOwnerData.uid, username: randOwnerData.username };
+            if (randOwner.uid !== key && following.find(user => user.uid === randOwner.uid) === undefined) {
+                following = [...following, randOwner]
+            }
 
+        }
+
+        let followers = [];
+        for (let i = 0; i < rand(numberOfUsers); i++) {
+            const randOwnerData = users[Object.keys(users)[rand(numberOfUsers)]];
+            const randOwner = { avatar: randOwnerData.avatar.thumbnail, uid: randOwnerData.uid, username: randOwnerData.username };
+            if (randOwner.uid !== key && followers.find(user => user.uid === randOwner.uid) === undefined) {
+                followers = [...followers, randOwner]
+            }
+        }
+
+        users = {
+            ...users, [key]: {
+                ...users[key],
+                following,
+                followers,
+            },
+        };
+    });
+    
     // faked pictures
-    const numberOfPictures = 1000;
+    const numberOfPictures = 1200;
     let pictures = [];
 
     for (let i = 0; i < numberOfPictures; i++) {
         const randOwnerData = users[Object.keys(users)[rand(numberOfUsers)]];
-        const randOwner = { uid: randOwnerData.uid, username: randOwnerData.username };
+        const randOwner = { avatar: randOwnerData.avatar.thumbnail, uid: randOwnerData.uid, username: randOwnerData.username };
         const likes = [];
         const comments = [];
 
@@ -82,16 +110,17 @@ async function importSeeds() {
 
         for (let j = 0; j < commentsCount; j++) {
             const randUserData = users[Object.keys(users)[rand(numberOfUsers)]];
-            const randUser = { uid: randUserData.uid, username: randUserData.username };
+            const randUser = { avatar: randOwnerData.avatar.thumbnail, uid: randUserData.uid, username: randUserData.username };
             comments.push({
                 user: randUser,
                 text: faker.lorem.sentence(),
                 timestamp: faker.date.past(),
+                id: await generateID(),
             });
         }
 
         const picture = {
-            id: await generateUID(),
+            id: await generateID(),
             image: await getImage(),
             description: faker.lorem.words(),
             owner: randOwner,
@@ -101,15 +130,6 @@ async function importSeeds() {
         pictures = [...pictures, picture];
         console.log(`${i} Created picture for ${randOwner}`);
     }
-
-    Object.keys(users).forEach(key => {
-        users = {
-            ...users, [key]: {
-                ...users[key],
-                pictures: pictures.filter(picture => picture.owner.uid === key)
-            },
-        };
-    });
 
     const initialJson = {}; // пустой массив для первоначального наполнения файла
 
@@ -132,8 +152,8 @@ async function importSeeds() {
         }
     });
 
-    let addLog = (log, users) => {
-        log = {...users};
+    let addLog = (log, users, pictures) => {
+        log = {users, pictures};
         return JSON.stringify(log, null, 4);
     };
 
@@ -141,7 +161,7 @@ async function importSeeds() {
         if (err) {
             throw err;
         } else {
-            let newLog = addLog(JSON.parse(data), users);
+            let newLog = addLog(JSON.parse(data), users, pictures);
             fs.writeFile(fileName, newLog, (err) => {
                 if (err) {
                     throw err;

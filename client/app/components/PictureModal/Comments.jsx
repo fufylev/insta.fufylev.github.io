@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentPostForm from './CommentPostForm.jsx';
-import {addPost} from '../../libs/api/API_comments';
-import { getUserAvatar } from '../../libs/api/API_user';
+import { addPost } from '~/libs/api/API_comments';
+import { getUserAvatar } from '~/libs/api/API_user';
+import { generateID } from '~/libs/api/API';
 
 function Comments(props) {
     const sortedComments = props.comments.sort((a, b) => b.timestamp - a.timestamp);
@@ -11,9 +12,10 @@ function Comments(props) {
 
     const postHandler = (post) => {
         const newPost = {
+            id: generateID(),
             text: post,
             timestamp: new Date(),
-            user: {uid: user.uid, username: user.username}
+            user: { avatar: user.avatar.thumbnail, uid: user.uid, username: user.username },
         };
         // use optimistic update
         setComments([newPost, ...comments]);
@@ -25,35 +27,31 @@ function Comments(props) {
 
                 // return previous state
                 const prevCommentsArrayState = comments.filter(comment => comment.timestamp !== newPost.timestamp);
-                setComments(prevCommentsArrayState)
+                setComments(prevCommentsArrayState);
             }
-        })
+        });
     };
 
-    /*const commentsUpdateWithUserAvatar = (uid, timestamp) => {
-        getUserAvatar(uid).then(url => {
-            const currentComment = comments.
-        })
-    };
-    
-    useEffect(() => {
-        comments.forEach(comment => {
-            commentsUpdateWithUserAvatar(comment.user.uid, comment.timestamp)
-        }) 
-    });*/
-    
     return (
         <>
             <div className='picture-card-comments'>
                 {numberOfComments > 0 && comments.map((comment, index) => {
                     return (
                         <div key={index} className='picture-card-comments-container'>
-                            <span
-                                onClick={() => goToUser(comment.user.uid)}
-                                className='picture-card-user_link'>
-                                {comment.user.username}
-                            </span>
-                            <span>{comment.text}</span>
+                            {comment.user.avatar && <img 
+                                src={comment.user.avatar}
+                                alt="avatar"
+                                className='picture-card-user-avatar'
+                            />}
+                            <div>
+                                <span
+                                    onClick={() => goToUser(comment.user.uid)}
+                                    className='picture-card-user_link'>
+                                    {comment.user.username}
+                                </span>
+                                <span>{comment.text}</span> 
+                            </div>
+                            
                         </div>
                     );
                 })}
