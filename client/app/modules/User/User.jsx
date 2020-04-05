@@ -85,7 +85,7 @@ class UserComponent extends Component {
                                 <span className='user-page-text'>posts</span>
                                 <span className='user-page-counts'>{currentUser.followers ? currentUser.followers.length : 0}</span>
                                 <span className='user-page-text'>followers</span>
-                                <span className='user-page-counts'>{currentUser.followings ? currentUser.followings.length : 0}</span>
+                                <span className='user-page-counts'>{currentUser.following ? currentUser.following.length : 0}</span>
                                 <span className='user-page-text'>following</span>
                             </div>
                             <h3>{currentUser.name.first} {currentUser.name.last}</h3>

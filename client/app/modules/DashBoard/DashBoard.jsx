@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { checkIfUserMetadataExists, getUser } from '~/libs/api/API';
 import { saveUserToStateHandler, setUserToDataBaseHandler } from '~/actions/users';
+import {data} from './data';
+import {addCollections} from '../../libs/api/API';
 
 class DashBoard extends Component {
 
     componentDidMount() {
-
         getUser().then(uid => {
             checkIfUserMetadataExists(uid)
                 .then(({ ifExists, metadata }) => {
@@ -19,6 +20,10 @@ class DashBoard extends Component {
                     }
                 });
         });
+        /*const users = data.users;
+        Object.keys(users).forEach(key => {
+            addCollections(users[key])
+        })*/
     }
 
     render() {

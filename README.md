@@ -1,4 +1,12 @@
-## Lite version of Instagram as part of my JS+React training
+Unfortunately, I decided to postpone this small project as I faced a bunch of problems regards Google FireBase and 
+eventually I realized that it was a mistake to use it as it was hard to send precise queries for a particular 
+endpoint and receive back exactly what I was needed. I had to use a sort of middleware code in order to clarify to 
+FireBase what I need, and, therefore, the code became more and more unreadable. 
+
+New version of the app you will find [here](https://github.com/fufylev/lite-insta-v2)
+##
+
+### Lite version of Instagram as part of my JS+React training
 
 In order to solidify my skills in React and NodeJS, I decided to build a sort of lite version of Instagram. 
 This is a Client-Server application with various stack: HTML, CSS+SASS (modules), JavaScript (ES6-9), 

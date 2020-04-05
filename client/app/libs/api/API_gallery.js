@@ -47,6 +47,7 @@ export const getUserPictures = (user) => {
         const picture = db.collection('pictures')
             .withConverter(picturesConverter)
             .where('owner', '==', {
+                avatar: user.avatar.thumbnail,
                 uid: user.uid,
                 username: user.username,
             });

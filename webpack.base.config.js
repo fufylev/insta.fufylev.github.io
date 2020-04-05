@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const PATHS = {
     app: path.resolve(__dirname, 'client', 'app'),
-    build: path.resolve(__dirname, 'client', 'build'),
+    build: path.resolve(__dirname, 'public'),
 };
 
 const plugins = [
